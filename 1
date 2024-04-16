@@ -1,0 +1,214 @@
+Este código divídelo en 2, un main y otro que sea el pixel art. El main funciona mandando a llamar al pixel art así que garégale un void. package hola;
+
+
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Canvas;
+import java.awt.Frame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+
+public class PixelArtUno {
+    static int width = 590;
+    static int height = 730;
+    
+    static Color azul = new Color(11,33,219,255);
+    static Color caca = new Color(153,77,0,255);
+    static Color rojo = new Color(254,51,0,255);
+    static Color carne = new Color(255,204,153,255);
+    static Color cafe= new Color (106,64,18,255);
+    static Color ama= new Color(255,255,1,255);
+    
+    
+    
+    static Graphics2D g;
+
+    static BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    // Definimos el tamaÃ±o del pixel y la matriz de colores
+    private final static int PIXEL_SIZE = 45;
+    private final static Color[][] PIXELS = {
+        {Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE},
+        {Color.WHITE, Color.BLUE, Color.BLUE, Color.BLUE, Color.WHITE},
+        {Color.WHITE, Color.BLUE, Color.RED, Color.BLUE, Color.WHITE},
+        {Color.WHITE, Color.BLUE, Color.BLUE, Color.BLUE, Color.WHITE},
+        {Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE}
+    };
+    
+    public static void paint() {
+    	
+    	  
+    	
+    
+    	  
+    	  
+    
+    	//Fondo
+    	  drawBackground(PIXEL_SIZE, Color.white);  
+    	  
+    	  //Playera
+    	  drawHorizontalLine(5,6,10,azul);
+    	  putPixel(4,10,ama);
+    	  putPixel(7,10,ama);
+    	  putPixel(3,10,azul);
+    	  putPixel(8,10,azul);
+    	  drawVerticalLine(7,9,4,azul);
+    	  drawVerticalLine(8,9,7,azul);
+    	  drawHorizontalLine(5,6,9,azul);
+    	  twoHor(3,8,11,azul);
+    	  twoHor(7,9,12,azul);
+    	  twoHor(2,4,12,azul);
+    	  twoHor(5,6,7,rojo);
+    	  twoHor(8,10,8,rojo);
+    	  twoHor(1,3,8,rojo);
+    	  drawHorizontalLine(2,3,7,rojo);
+    	  drawHorizontalLine(6,8,7,rojo);
+    	  putPixel(2,10,rojo);
+    	  putPixel(9,10,rojo);
+    	  
+    	  putPixel(0,9,rojo);
+    	  putPixel(11,9,rojo);
+    	  twoVer(10,12,0,carne);
+    	  twoVer(10,12,10,carne);
+    	  putPixel(2,11,carne);
+    	  putPixel(9,11,carne);
+    	  
+    	  
+    	  //Zapas
+    	  twoHor(1,3,14,cafe);
+    	  twoHor(8,10,14,cafe);
+    	  putPixel(11,15,cafe);
+    	  putPixel(0,15,cafe);
+    	  
+    	  
+    	  
+    	  
+    	  
+          
+          //hat-----------------------------------
+         drawHorizontalLine(3, 8,0, rojo);
+         drawHorizontalLine(2, 11,1, rojo);
+         
+
+         //jeta-------------------------------------
+         drawHorizontalLine(5, 9,2,carne);
+         drawHorizontalLine(2, 4,2,caca);
+         drawVerticalLine(3,5,1,caca);
+         putPixel(2,5,caca);
+         drawVerticalLine(3,4,3,caca);
+         putPixel(4,4,caca);
+         drawVerticalLine(3,4,2,carne);
+         drawHorizontalLine(4, 11,3,carne);
+         drawHorizontalLine(5, 12,4,carne);
+         drawHorizontalLine(3, 11,5,carne);
+         drawHorizontalLine(3, 10,6,carne);
+         drawVerticalLine(2, 3,8,Color.BLACK);
+         drawHorizontalLine(8, 11,5,Color.BLACK);
+         putPixel(9,4,Color.black);
+
+         
+         
+          
+          
+          
+          
+//          putPixel(0,12,darkBlue);
+//          putPixel(0,12,darkBlue);
+//          putPixel(0,12,darkBlue);
+//          putPixel(0,12,darkBlue);
+//          putPixel(0,12,darkBlue);
+//          putPixel(0,12,darkBlue);
+          
+         
+         
+        
+     	
+          
+        //cuadrícula 
+         drawSquareGrid(PIXEL_SIZE, Color.BLACK);
+        
+        try {       
+            ImageIO.write(image, "jpg", new File("PArte1.jpg"));
+            System.out.println("EXITO !!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static void drawVerticalLine(int a, int b, int x, Color c){
+    	for(int i=a;i<=b;i++){
+     	   g.setColor(c);
+           g.fillRect(x * PIXEL_SIZE, i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+    
+    private static void drawHorizontalLine(int a, int b, int y, Color c){
+        for(int i=a;i<=b;i++){
+     	   g.setColor(c);
+           g.fillRect(i * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+    
+    private static void putPixel(int x, int y, Color c){       
+	   g.setColor(c);
+	   g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);    
+    }
+    
+    private static void fillRect(int x, int y, int width, int height, Color c){
+    	g.setColor(c);
+    	g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, width*PIXEL_SIZE, height*PIXEL_SIZE);
+    }
+    
+    private static void drawSquareGrid(int size, Color c) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {                
+                g.setColor(c);
+                g.drawRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            }
+        }
+    }
+    private static void drawBackground(int size, Color c) {
+    	for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                g.setColor(c);
+                g.fillRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);                
+            }
+        }
+    }
+    
+    private static void twoHor (int a, int b, int y, Color c){
+        for(int i=a;i<=b;i++){
+        
+     	   g.setColor(c);
+           g.fillRect(i * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+           g.setColor(c);
+           g.fillRect(i * PIXEL_SIZE, (y+1)* PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+           
+        	 }
+        
+    }
+    private static void twoVer(int a, int b, int x, Color c){
+    	
+    	for(int i=a; i<=b;i++) {
+    		g.setColor(c);
+            g.fillRect(x * PIXEL_SIZE,  i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            g.setColor(c);
+            g.fillRect((x+1) * PIXEL_SIZE, i* PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+    		
+    	}
+    }
+//    private static void bigPixe(int x, int y, Color c){
+//       g.setColor(c);
+//   	   g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE); 
+//    }
+    		
+    
+    
+    public static void main(String[] args) {
+        g = image.createGraphics();        
+        paint();
+    }
+    }
+ 
