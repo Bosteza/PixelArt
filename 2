@@ -1,0 +1,106 @@
+package hola;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+
+public class PixelArtDos {
+
+	static final int width2 = 300;
+    static final int height2 =300;
+    private static final int PIXEL_SIZE = 40;
+
+    public static void paint2(Graphics2D g2, BufferedImage image, int width, int height) {
+        // Definición de colores
+        Color azulf = new Color(36,36,164);
+        Color azulm = new Color(52,68,212);
+        Color azul = new Color(100,100,228);
+        Color carne = new Color(224,160,128,255);
+        Color cafe = new Color(128,0,0,255);
+        Color carne2= new Color(160,96,64,255);
+        Color gris= new Color (64,64,64,255);
+        Color gris2= new Color(128,128,128,255);
+        Color gris3= new Color(160,160,160,255);
+        Color blanco = Color.WHITE;
+        Color negro = Color.BLACK;
+
+        // Fondo
+        drawBackground(g2, width, blanco);
+
+
+
+        // Zapatos
+        twoHor(g2, 1, 3, 14, cafe);
+        twoHor(g2, 8, 10, 14, cafe);
+        putPixel(g2, 11, 15, cafe);
+        putPixel(g2, 0, 15, cafe);
+
+
+
+        // Cuadrícula
+        drawSquareGrid(g2, height, negro);
+
+        // Guardar la imagen
+        try {
+            ImageIO.write(image, "jpg", new File("PArte2.jpg"));
+            System.out.println("EXITO !!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void drawVerticalLine(Graphics2D g, int a, int b, int x, Color c) {
+        for (int i = a; i <= b; i++) {
+            g.setColor(c);
+            g.fillRect(x * PIXEL_SIZE, i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+
+    private static void drawHorizontalLine(Graphics2D g, int a, int b, int y, Color c) {
+        for (int i = a; i <= b; i++) {
+            g.setColor(c);
+            g.fillRect(i * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+
+    private static void putPixel(Graphics2D g, int x, int y, Color c) {
+        g.setColor(c);
+        g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+    }
+
+    private static void twoHor(Graphics2D g, int a, int b, int y, Color c) {
+        for (int i = a; i <= b; i++) {
+            g.setColor(c);
+            g.fillRect(i * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            g.fillRect(i * PIXEL_SIZE, (y + 1) * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+
+    private static void twoVer(Graphics2D g, int a, int b, int x, Color c) {
+        for (int i = a; i <= b; i++) {
+            g.setColor(c);
+            g.fillRect(x * PIXEL_SIZE, i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            g.fillRect((x + 1) * PIXEL_SIZE, i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+
+    private static void drawSquareGrid(Graphics2D g, int size, Color c) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                g.setColor(c);
+                g.drawRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            }
+        }
+    }
+
+    private static void drawBackground(Graphics2D g, int size, Color c) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                g.setColor(c);
+                g.fillRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            }
+        }
+    }
+}
